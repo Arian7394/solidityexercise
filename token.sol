@@ -1,5 +1,5 @@
 // SPDX-License-Identifier: UNLICENSED
-pragma solidity >=0.7.0 <0.9.0;
+pragma solidity ^0.4.18;
 
 /* 
 Exercise 1: No loop!
@@ -14,7 +14,7 @@ contract Token_naive {
   uint[] public balances;
   uint public totalSupply;
 
-  constructor(uint _initialSupply) 
+  function Token_naive(uint _initialSupply) public
   {
     addresses.push(msg.sender);
     balances.push(_initialSupply);
@@ -79,7 +79,13 @@ Exercise 3: Is require, required?
 /* 
 Exercise 4: self destruction!
 1- Try calling close function. What does it do?
-2- There is a security vulnerability in this function. Can you find it?s 
+2- There is a security vulnerability in this function. Can you find it?
+*/
+
+/* 
+Exercise 5: underflow!
+1- Try calling the transfer function for a account with 0 balance in the system, to transfer some amount to another account?
+2- What happens? Why?
 */
 
 contract Token {
@@ -88,7 +94,7 @@ contract Token {
   uint public totalSupply;
   address public owner;
 
-  constructor(uint _initialSupply) {
+  function Token(uint _initialSupply) public {
     balances[msg.sender] = totalSupply = _initialSupply;
     owner = msg.sender;
   }
@@ -117,7 +123,7 @@ contract Token {
     return balances[_owner];
   }
 
-  function close(address payable _to) public 
+  function close(address _to) public 
   { 
     selfdestruct(_to); 
   }
